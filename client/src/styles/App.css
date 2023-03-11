@@ -1,0 +1,145 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  min-height: 94.7vh;
+  background-image: linear-gradient(
+		to bottom right,
+		#e9ecef,
+		#BBD2C5,
+		#536976,
+		#5a5e68,
+		#BBD2C5
+	);
+	padding: 20px;
+  background-size: 200% 200%;
+	animation: move 8s linear infinite alternate;
+  background-repeat: no-repeat;
+}
+
+body::-webkit-scrollbar{
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: rgba(77, 4, 110, 0.712);
+  border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb:hover{
+  background: rgba(59, 3, 85, 0.712);
+}
+
+.message img{
+  width: 90%;
+  height: 76vh;
+  margin: 2rem;
+  padding-top: 20px;
+  transform-origin: center;
+  transform: perspective(800px) rotateY(20deg);
+  transition: 0.5s;
+  -webkit-box-reflect: below 3px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+}
+
+.message img:hover{
+  transform: perspective(800px) rotateY(0deg);
+}
+
+.container-form{
+  width: 90%;
+  height: 90vh;
+  display: flex;
+  justify-content: space-around;
+  transition: all .5s ease-out;
+}
+
+.welcome-back{
+  display: flex;
+  align-items: center;
+  text-align:  center;
+}
+
+.message{
+  padding: 1rem;
+}
+
+.message h2{
+  font-size: 1.7rem;
+  padding: 1rem 0;
+}
+
+.form{
+  width: 400px;
+  padding: 1rem;
+  margin: 2rem;
+  background-color: rgb(255, 255, 255, 0.30);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  border-radius: 1rem;
+  
+}
+
+.form h2{
+  padding: 4rem 0;
+  color: rgb(58, 57, 57);
+}
+
+.form input{
+  width: 70%;
+  display: block;
+  margin: auto;
+  margin-bottom: 2rem;
+  background-color: transparent;
+  padding: .7rem 0;
+  font-size: .9rem;
+  outline: none;
+  border: none;
+  border-bottom: rgba(77, 4, 110, 0.712) thin solid;
+  color: rgb(58, 57, 57);
+}
+
+.form input::placeholder{
+  color: #252323;
+}
+
+.form button{
+  width: 60%;
+  margin: auto;
+  padding: .7rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  font-size: .8rem;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+.table{
+  margin-top: 300px;
+}
+
+.title{
+  text-align: center;
+  padding: 0 0 7px 0;
+  color: #252323; 
+  font-weight: 700;
+  font-size: 30px;
+}
+
+@keyframes move {
+	from { background-position: 0 0; }
+	to { background-position: 100% 100%; }
+}
+
+
+
