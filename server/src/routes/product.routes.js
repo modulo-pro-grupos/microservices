@@ -2,23 +2,19 @@ const { Router } = require('express')
 const router     = Router()
 const _var       = require('../global/var.js')
 const controller = require('../controllers/product.controller.js')
-const { pool }   = require('../models/postgres.connect.js')
- 
 
 router.get(_var.ROOT, (req, res) => {
 	res.send('Hello World')
 })
 
-router.get('/product', async (req, res) => {
-	let sql  = `SELECT * FROM products;`
-	let prod = await pool.query(sql)
-	console.log(prod)
-	res.send(prod.rows)
-})
-
 router.get(_var.GETPRO, async (req, res) => {
 	const { name } = req.params
 	const product  = await controller.getProduct(name)
+	res.status(product.code).json(product)
+})
+
+router.get(_var.GETPRD, async (req, res) => {
+	const product  = await controller.getProducts()
 	res.status(product.code).json(product)
 })
 

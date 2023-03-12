@@ -1,6 +1,20 @@
 import { Table } from "@nextui-org/react"
+import { useState } from "react"
+import { useEffect } from "react"
+import instance from "../app/axios"
 
 const TableProduct = () => {
+  const [ rows, setRows ] = useState([])
+  useEffect(() => {
+    instance.get('/getproduct')
+    .then((res) => {
+      setRows(res.data.data)
+    })
+    .catch((err) => {
+      alert(err.response.data.message)
+    })
+  }, [rows])
+
   const columns = [
     {
       key: "id",
@@ -11,11 +25,15 @@ const TableProduct = () => {
       label: "NAME",
     },
     {
-      key: "role",
+      key: "department",
+      label: "DEPARTMENT",
+    },
+    {
+      key: "amount",
       label: "AMOUNT",
     },
     {
-      key: "status",
+      key: "expiration",
       label: "EXPIRATION",
     },
     {
@@ -23,40 +41,7 @@ const TableProduct = () => {
       label: "PRICE",
     },
   ]
-
-  const rows = [
-    {
-      key: "1",
-      name: "Tony Reichert",
-      role: "CEO",
-      status: "Active",
-    },
-    {
-      key: "2",
-      name: "Tony Reichert",
-      role: "CEO",
-      status: "Active",
-    },
-    {
-      key: "3",
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      status: "Paused",
-    },
-    {
-      key: "4",
-      name: "Jane Fisher",
-      role: "Senior Developer",
-      status: "Active",
-    },
-    {
-      key: "5",
-      name: "William Howard",
-      role: "Community Manager",
-      status: "Vacation",
-    },
-  ]
-
+  
   return (
     <div className="container-table">
 			<h2 className="title">List of Products</h2>
@@ -68,17 +53,24 @@ const TableProduct = () => {
         }}
         selectionMode="single"
       >
+        
         <Table.Header columns={columns}>
           {(column) => (
             <Table.Column key={column.key}>{column.label}</Table.Column>
           )}
         </Table.Header>
-        <Table.Body items={rows}>
-          {(item) => (
-            <Table.Row key={item.key}>
-              {(columnKey) => <Table.Cell>{item[columnKey]}</Table.Cell>}
+        
+        <Table.Body>
+          {rows.map((row) => (
+            <Table.Row key={row.id}>
+              <Table.Cell>{row.id}</Table.Cell>
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.department}</Table.Cell>
+              <Table.Cell>{row.amount}</Table.Cell>
+              <Table.Cell>{row.expiration}</Table.Cell>
+              <Table.Cell>{row.price}</Table.Cell>
             </Table.Row>
-          )}
+          ))}
         </Table.Body>
       </Table>
     </div>

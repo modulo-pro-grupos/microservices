@@ -10,8 +10,27 @@ let msg = {
 const getProduct = async (name) => {
 	let sql  = `SELECT COUNT(id) FROM products WHERE name = '${name}';`
 	let prod = await pool.query(sql)
-	console.log(prod)
 	if (prod.rows[0].count == 1) {
+		msg = {
+			status: true,
+			message: "Product found Succesfully",
+			data: prod.rows,
+			code: 200
+		}
+	}else{
+		msg = {
+			status: false,
+			message: "Product not found",
+			code: 200
+		}
+	} 
+	return msg
+}
+
+const getProducts = async () => {
+	let sql  = `SELECT * FROM products;`
+	let prod = await pool.query(sql)
+	if (prod.rows[0]?.id) {
 		msg = {
 			status: true,
 			message: "Product found Succesfully",
@@ -48,5 +67,5 @@ const insertProduct = async (name, department, amount, expiration, price) => {
 }
 
 module.exports = {
-	getProduct, insertProduct
+	getProduct, getProducts, insertProduct
 }
